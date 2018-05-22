@@ -1,2 +1,2 @@
 # 120B-FinalProject
-Final Project for 120B
+Final Project for CS120B at UCR.
