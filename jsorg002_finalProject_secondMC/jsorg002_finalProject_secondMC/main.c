@@ -19,10 +19,10 @@ int main(void)
 	DDRD = 0xFF; PORTD = 0x00;
     /* Replace with your application code */
 	Init_PWM();
-	pwm_enable(2);
-	pwm_dutycycle(2, 100);
+	//pwm_enable(2);
+	//pwm_dutycycle(2, 100);
 	
-  /*  while (1) 
+    while (1) 
     {
 		if(PINC != redValue){
 			redValue = PINC;
@@ -34,7 +34,7 @@ int main(void)
 			}	
 		}
 		_delay_ms(1);
-    }*/
+    }
 }
 
 

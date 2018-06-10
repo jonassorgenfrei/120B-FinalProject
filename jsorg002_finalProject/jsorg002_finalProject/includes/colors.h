@@ -24,39 +24,49 @@ double min(double d1, double d2, double d3){
 color hsvtorgb(unsigned long hue, unsigned char saturation, unsigned char value)
 {
 	color tColor;
-	double chroma = (double)value/255.0 * (double)saturation/255.0;
-	double hue1 = (double)hue/60.0;
-	double x = chroma * (double)(1-abs((hue/60)%2-1));
+	double s = (double)saturation / 255.0f;
+	double v = (double)value / 255.0f;
+	
+	double hue1 = (double)hue;
+	if(hue >= 360.0) hue1 = 0.0;
+	hue1 /= 60.0f;
+	double i = (long)hue1;
+	double ff = hue1 - i;
+	double p = v * (1.0f - s);
+	double q = v * (1.0f - (s*ff));
+	double t = v * (1.0f - (s * (1.0f - ff)));
+	
 	double r = 0.0,g = 0.0,b = 0.0;
-	if(hue1 >= 0 && hue1 <= 1) {
-		r = chroma;
-		g = x;
-		b = 0.0;
-	} else if(hue1 >= 1 && hue1 <= 2){
-		r = x;
-		g = chroma;
-		b = 0.0;
-	} else if (hue1 >= 2 && hue1 <= 3) {
-		r = 0.0;
-		g = chroma;
-		b = x;
-	} else if (hue1 >= 3 && hue1 <= 4) {
-		r = 0.0;
-		g = x;
-		b = chroma;
-	} else if (hue1 >= 4 && hue1 <= 5) {
-		r = x;
-		g = 0.0;
-		b = chroma;
-	} else if (hue1 >= 5 && hue1 <= 6) {
-		r = chroma;
-		g = 0.0;
-		b = x;
+	
+	if(hue1 >= 0.0f && hue1 < 1.0f) {
+		r = v;
+		g = t;
+		b = p;
+	} else if(hue1 >= 1.0f && hue1 < 2.0f){
+		r = q;
+		g = v;
+		b = p;
+	} else if (hue1 >= 2.0f && hue1 < 3.0f) {
+		r = p;
+		g = v;
+		b = t;
+	} else if (hue1 >= 3.0f && hue1 < 4.0f) {
+		r = p;
+		g = q;
+		b = v;
+	} else if (hue1 >= 4.0f && hue1 < 5.0f) {
+		r = t;
+		g = p;
+		b = v;
+	} else if (hue1 >= 5.0f && hue1 < 6.0f) {
+		r = v;
+		g = p;
+		b = q;
 	}
-	double m = ((double)value/255) - chroma;
-	tColor.R = (unsigned char)((r+m)*255.0);
-	tColor.G = (unsigned char)((g+m)*255.0);
-	tColor.B = (unsigned char)((b+m)*255.0);
+
+	tColor.R = (unsigned char)(r*255.0f);
+	tColor.G = (unsigned char)(g*255.0f);
+	tColor.B = (unsigned char)(b*255.0f);
 	
 	return tColor;
 }

@@ -78,7 +78,8 @@ color getColor(int x, int y, int radius, double r){
 	unsigned long hue = (unsigned long)((phi + M_PI) / (2.0 * M_PI) * 360.0);
 	unsigned char saturation = (unsigned char)(r / (double)radius * 255.0);
 	unsigned char value = 255;
-	
+	printf("%c", saturation);
+	printf("%c", hue);
 	return hsvtorgb(hue, saturation, value);
 }
 
@@ -345,8 +346,7 @@ int SMTICK4(int state){
 /* MAIN FUNCTION                                                        */
 /************************************************************************/
 int main(void)
-{
-
+{	
 	/************************************************************************/
 	/* INIT PORTS                                                           */
 	/************************************************************************/
